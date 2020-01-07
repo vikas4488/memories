@@ -1,0 +1,112 @@
+
+{% load static %}
+<html {{style.bgclr}}>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body class="noselect">
+
+
+    {% ifnotequal  popmsg "empty" %}
+    <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+    {% endifnotequal  %}
+
+
+<div class="mynav " {{ style.navclr}} >
+    <div class="diary">DIARY</div>
+<div class="lans">{{lan}}</div>
+</div>
+
+<div class="super-block" {{ style.bgclr}} >
+
+
+
+    <div class="pagehead"><div><span class="lan welcome_mr"></span></div><div>{{fname}} {{lname}}</div></div>
+
+<div id="viewrecords" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8viewrecords.png"/>
+        <span class="menu-label">
+            <span class="lan view_records"></span>
+        </span>
+</div>
+<div id="dataentrypage" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8addentry.png"/>
+        <span class="menu-label">
+            <span class="lan add_entry"></span>
+        </span>
+</div>
+<div id="profilepage" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8profile.png"/>
+        <span class="menu-label">
+            <span class="lan profile_label"></span>
+        </span>
+</div>
+<div id="themepage" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8theme.png"/>
+        <span class="menu-label">
+            <span class="lan theme_label"></span>
+        </span>
+</div>
+<div id="contactadmin" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8creator.png"/>
+        <span class="menu-label">
+            <span class="lan contact_admin"></span>
+        </span>
+</div>
+<div id="verifyuser" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8friends.png"/>
+        <span class="menu-label">
+            <span class="lan share_friend"></span>
+        </span>
+</div>
+<div id="help" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8help.png"/>
+        <span class="menu-label">
+            <span class="lan help_label"></span>
+        </span>
+</div>
+<div id="aboutit" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8about.png"/>
+        <span class="menu-label">
+            <span class="lan about_label"></span>
+        </span>
+</div>
+<div id="logout" class="boxes">
+ <img class="menu-icon" src="media/diary/icons8logout.png"/>
+        <span class="menu-label">
+            <span class="lan logout_label"></span>
+        </span>
+</div>
+
+
+    <!--<script> window.location.href="index.php"</script>-->
+<script>
+    var userprofile="{% url 'userprofile' %}";
+    var dataentry="{% url 'dataentry' %}";
+    var viewrecords="{% url 'viewrecords' %}";
+    var contactadmin="{% url 'contactadmin' %}";
+    var logout="{% url 'logout' %}";
+    var help="{% url 'help' %}";
+    var about="{% url 'about' %}";
+    var theme="{% url 'theme' %}";
+</script>
+
+			</div>
+	{% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+
+
+<script src="{% static 'diary/custom.js' %}"></script>
+
+</body>
+</html>

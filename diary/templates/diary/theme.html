@@ -1,0 +1,131 @@
+{% load static %}
+<html {{style.bgclr}}>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body class="noselect">
+    <form method="post" action="{% url 'createtheme' %}" id="themedelete">{% csrf_token %}<input type="hidden" value="" name="tid" /></form>
+    <div class="popwrap formpop" style="display:none;"><div class="popmsg"{{ style.popupclr}}><div class="formmsg"></div><div class="closeconfirm cancle_btn" {{ style.btnrej}}><span class="lan cancle_label"></span></div><div class="closeconfirm dlform"{{ style.btncnf}}><span class="lan confirm_label"></span></div></div></div>
+{% ifnotequal  popmsg "empty" %}
+    <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+{% endifnotequal  %}
+
+<div class="super-block" {{style.bgclr}}>
+			     <div class="mynav " {{style.navclr}}>
+			        <div class="homewrap" style="margin-left: 12px;"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			        <div class="lans">{{lan}}</div>
+			    </div>
+
+<div class="halfblock" style="padding:4%;margin-top:3%;">
+    <div class="smview createtheme">
+        <div class="smhead" style="background-color:<?php echo $allcolor[4]; ?>">Diary</div>
+ <img class="menu-icon" style="margin-top:10px;" src="../../media/diary/icons8colors.png"/>
+ <div  style="position: absolute;text-align: center;width: 40%;">create new</div>
+
+</div>
+                <div class="popcard big-block " {{style.cardclr}}>
+				<form  action="{% url 'createtheme' %}" method="post">
+				    {% csrf_token %}
+                <div class="editdiv smoothborder"><span class="reclabel " {{style.labelclr}}><span class="lan theme_name">name</span> :</span>
+                <div class="tempData">new theme</div>
+                 <input class="recordedit " {{style.ipclr}}  type="text" value="new theme" name="themename"  />
+                </div>
+                <div class="colorscroll">
+                    <div class="color-head">
+
+                        <span class="llb">color</span>
+                        <span class="llb" style="border-right: 1px solid;">font</span>
+                    </div>
+
+                  {% for clr in theme.0.clrstr %}
+
+                    <div class="editdiv smoothborder"><span class="themelabel"><span class="{{clr.name}}">background color</span> : </span>
+					<input class="themedataedit" type="color" clr="{{clr.clr1}}" value="{{clr.clr1}}" name="nclr" />
+					<input class="themedataedit" type="color" clr="{{clr.clr2}}" value="{{clr.clr2}}" name="fclr" />
+					</div>
+
+                    {% endfor %}
+
+					</div>
+						<button class="log-reg " style="{{css.btncnf}}float:none;"><span class="lan change_theme">create</span></button>
+					<div class="log-reg thcancle" {{style.btnpro}} ><span class="lan change_theme">cancle</span></div>
+
+				</form>
+					</div>
+				</div><!--half block end here-->
+
+{% for color in theme %}
+<div class="halfblock" style="padding:4%;margin-top:3%;">
+<div class="smview {{color.id}}smbgclr" >
+<div class="smhead {{color.id}}smnavclr" >Diary</div>
+<div class="smbg {{color.id}}smbgclr" ></div>
+<div class="smcard {{color.id}}smcardclr">
+<div class="smlabel {{color.id}}smlabelclr" >{{color.name}}</div>
+<div class="smpop {{color.id}}smpopupclr"  >popup
+
+</div>
+{% ifequal color.type 'usertype' %}
+<div class="smblue opentheme {{color.id}}smbtnpro">edit</div>
+{% endifequal %}
+<form action="{% url 'settheme' %}" method="post">
+    {% csrf_token %}
+<input type="hidden"  value="{{color.id}}" name="themeid" />
+<div class="smgreen settheme {{color.id}}smbtncnf">set</div>
+</form>
+</div>
+</div>
+                <div class="popcard big-block " {{style.cardclr}}>
+				<form  action="{% url 'createtheme' %}" method="post">
+				    {% csrf_token %}
+                <div class="editdiv smoothborder"><span class="reclabel " {{style.labelclr}}><span class="lan theme_name">name</span> :</span>
+                <div class="tempData">{{color.name}}</div>
+                 <input class="recordedit " {{style.ipclr}}  type="text" value="{{color.name}}" name="themename"  />
+                </div>
+                <input type="hidden"  value="{{color.id}}" name="themeid" />
+                <div class="colorscroll">
+                    <div class="color-head">
+                        <span class="llb">color</span>
+                        <span class="llb" style="border-right: 1px solid;">font</span>
+                    </div>
+
+
+                    {% for clr in color.clrstr %}
+                            <script> $(".{{color.id}}sm{{clr.name}}").css({"background-color": '{{clr.clr1}}', 'color': '{{clr.clr2}}'}); </script>
+                    <div class="editdiv smoothborder"><span class="themelabel"><span class="{{clr.name}}">background color</span> : </span>
+					<input class="themedataedit" type="color" clr="{{clr.clr1}}" value="{{clr.clr1}}" name="nclr" />
+					<input class="themedataedit" type="color" clr="{{clr.clr2}}" value="{{clr.clr2}}" name="fclr" />
+					</div>
+                        {% endfor %}
+					</div>
+						<button class="log-reg " style=" {{css.btncnf}}float:none;"><span class="lan change_theme">change</span></button>
+						<div class="log-reg thdelete" style=" {{css.btnrej}}float: none;" ><span class="lan label_cancle">delete</span></div>
+					<div class="log-reg thcancle" {{style.btnpro}}><span class="lan label_cancle">cancle</span></div>
+
+				</form>
+				</div>
+				</div><!--half block end here-->
+{% endfor %}
+				</div>
+<script>
+    var navigation="{% url 'navigation' %}";
+</script>
+ {% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+
+
+
+
+<script src="{% static 'diary/custom.js' %}"></script>
+</body>
+</html>

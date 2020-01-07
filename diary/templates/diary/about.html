@@ -1,0 +1,75 @@
+{% load static %}
+<html {{style.bgclr}} >
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body class="noselect">
+
+<div class="super-block" {{style.bgclr}}>
+
+			    <div class="mynav " {{style.navclr}}>
+			        <div class="homewrap"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			        <div class="lans">{{lan}}</div>
+			    </div>
+
+<div class="mainwrap" style="{{css.cardclr}}margin-left: 5%;">
+
+<div class="creatorpic"></div>
+
+    <div class="aboutwrap">
+<div class="dat"><span class="lan creator_name_label "></span></div>
+<div class="formwrap" style="display:block;"><hr style="margin:5px;margin-left:0px;border-top:1px solid black">
+<span class="lan creator_name_details"></span>
+</div>
+</div>
+
+<div class="aboutwrap">
+<div class="dat"><span class="lan c_location_label "></span></div>
+<div class="formwrap" style="display:block;"><hr style="margin:5px;margin-left:0px;border-top:1px solid black">
+<span class="lan c_location_details"></span>
+</div>
+</div>
+
+<div class="aboutwrap">
+<div class="dat"><span class="lan aim_of_app "></span></div>
+<div class="formwrap"style="display:block;"><hr style="margin:5px;margin-left:0px;border-top:1px solid black">
+<span class="lan aim_of_app_details"></span>
+</div>
+</div>
+
+<div class="aboutwrap">
+<div class="dat"><span class="lan services_of_app "></span></div>
+<div class="formwrap"style="display:block;"><hr style="margin:5px; margin-left:0px;border-top:1px solid black">
+<span class="lan services_of_app_details"></span>
+</div>
+</div>
+
+<div class="aboutwrap">
+<div class="dat"><span class="lan "></span></div>
+<div class="formwrap"style="display:block;"><hr style="margin:5px;margin-left:0px;border-top:1px solid black">
+<span class="lan thanks_label"></span>
+</div>
+</div>
+
+</div>
+
+</div>
+<script>
+    var navigation="{% url 'navigation' %}";
+</script>
+	{% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+<script src="{% static 'diary/custom.js' %}"></script>
+</body>
+</html>

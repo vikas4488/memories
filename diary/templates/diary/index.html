@@ -1,0 +1,130 @@
+{% load static %}
+
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body class="noselect">
+
+
+
+	<div class="popwrap formpop" style="display:none;"><div class="popmsg popup-clr"><div class="formmsg"></div><div class="closeconfirm cancle_btn btn-rej" style="display:none"><span class="lan cancle_label"></span></div><div class="closeconfirm submitForm btn-cnf"><span class="lan confirm_label"></span></div></div></div>
+
+	<div class="popwrap uipop" style="display:none;"><div class="popmsg popup-clr"><div class="uipopmsg"></div><div class="closeconfirm btn-cnf"><span class="lan confirm_label"></span></div></div></div>
+
+		<div class="mynav nav-clr">
+		    <div class="diary">DIARY</div>
+			        <div class="lans">en</div>
+			    </div>
+
+	<div class="super-block">
+           <div class="big-block" >
+
+			<span id="showlogin" class="label-big-block login-label-clr" style="width:58%;position:absolute;left:10%;">
+						<span class="lan login_button"></span>
+					</span>
+					<span id="showreg" class="label-big-block reg-label-clr" style="width:20%;position:absolute;left:70%">
+						<span class="lan register_button"></span>
+					</span>
+
+				<form id="loginsec" style="margin-top: 75px;"  action="{% url 'login' %}" method="post">
+					{% csrf_token %}
+
+					<div class="ipwrap" >
+						<input class="ip login-border" type="text" name="userid" placeholder=" " pattern="[0-9]{10}" maxlength="10"/>
+						<span class="lan  phone_number iplabel"></span>
+					</div>
+
+
+					<div class="ipwrap" >
+						<input class="ip login-border" type="password" name="password" placeholder=" "pattern="[a-zA-Z0-9]{4,10}" />
+						<span class="lan password_label iplabel "></span>
+					</div>
+
+
+
+						<div id="loginbutton" class="log-reg btn-cnf">
+							<span class="lan login_button"></span>
+						</div>
+
+
+				</form>
+
+				<form  id="regformpop" action="{% url 'register' %}" method="post" style="margin-top: 75px;display:none;">
+					{% csrf_token %}
+
+
+
+					<div class="ipwrap " >
+						<input class="ip reg-border" type="text" name="fname" pattern=".*\S+.*" placeholder=" " />
+						<span class="lan first_name iplabel "></span>
+					</div>
+
+					<div class="ipwrap" >
+						<input class="ip reg-border" type="text" pattern=".*\S+.*" name="lname" placeholder=" " />
+						<span class="lan last_name iplabel "></span>
+					</div>
+
+					<div class="ipwrap"  >
+					    <span class="lan gender_label"></span>
+					<input type="radio" name="gender" id="female" value="female" checked="checked">
+					<label for="female" style="display: inline-block;"><span class="lan female_label"></span></label>
+                    <input type="radio" name="gender" id="male" value="male">
+                    <label for="male" style="display: inline-block;"><span class="lan male_label"></span></label>
+                    </div>
+
+					<div class="ipwrap" >
+						<input class="ip reg-border" type="text" name="pnumber" placeholder=" " pattern="[0-9]{10}" maxlength="10"/>
+						<span class="lan phone_number iplabel " ></span>
+					</div>
+
+					<div class="ipwrap" >
+						<input class="ip reg-border" type="text" pattern=".*\S+.*" name="place" placeholder=" " />
+						<span class="lan place_label iplabel "></span>
+					</div>
+
+
+					<div class="ipwrap"  >
+					    <span class="lan use_as"></span>
+					<input type="radio" name="ui_type" id="work" value="work" checked="checked">
+					<label for="work" style="display: inline-block;"><span class="lan work_record"></span></label>
+                    <input type="radio" name="ui_type" id="diary" value="diary">
+                    <label for="diary" style="display: inline-block;"><span class="lan dairy_maintain"></span></label>
+                    </div>
+
+
+					<div class="ipwrap" >
+						<input class="ip reg-border" type="password" name="password" placeholder=" " pattern="[a-zA-Z0-9]{4,10}"  />
+						<span class="lan new_password iplabel "></span>
+					</div>
+
+					<div class="ipwrap" >
+						<input class="ip reg-border" type="password"  placeholder=" " pattern="[a-zA-Z0-9]{4,10}" />
+						<span class="lan re_password iplabel "></span>
+					</div>
+
+
+
+						<div id="regbutton" class="log-reg btn-pro">
+							<span class="lan register_button"></span>
+						</div>
+
+
+				</form>
+			</div>
+		</div>
+
+
+
+
+	<script src="{% static 'diary/custom.js' %}"></script>
+
+</body>
+</html>

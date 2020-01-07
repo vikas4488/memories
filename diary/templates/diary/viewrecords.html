@@ -1,0 +1,142 @@
+{% load static %}
+<html {{style.bgclr}}>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+
+</head>
+<body class="noselect">
+
+{% ifnotequal  popmsg "empty" %}
+    <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+    {% endifnotequal  %}
+
+
+
+
+<div style="display:none" class="popwrap"><div class="popmsg" {{style.popupclr}} ><div class="ajaxmsg">loading.....</div><div class="closeconfirm" {{style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+<div class="super-block" {{style.bgclr}} >
+
+			    <div class="mynav" {{style.navclr}} >
+			        <div class="homewrap"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			        <div class="lans">{{lan}}</div>
+			    </div>
+
+
+			  <div class="searchdiv">
+
+			  	 <div class="search-wrap">
+			  <div class="search-menu-wrap">
+			  <div class="search-nav" style="{{css.btnpro}} box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);" id="on-date">date</div>
+			  <div class="search-nav" {{style.btnpro}}   id="date-range">date range</div>
+			  <div class="search-nav" {{style.btnpro}}   id="on-word">words</div>
+			  </div>
+
+			      <div class="searchwrap " {{style.cardclr}} >
+			          <form action="{% url 'viewrecords' %}" method="post" >
+			      	{% csrf_token %}
+				  <div class="search-nav-div" id="on-date-div" style="display:block">
+			          <div class="searchlabel " {{style.labelclr}} ><span class="lan search_specific_date"></span></div>
+			          <input class="icolor" {{style.ipclr}}  type="date" name="specificdate"/>
+					</div>
+					<div class="searchbtn" style="{{css.btncnf}} margin:7px"><span class="lan search_label"></span></div>
+                    </form>
+					<form action="{% url 'viewrecords' %}" method="post" >
+			      	{% csrf_token %}
+					<div class="search-nav-div" id="date-range-div">
+					  <div class="searchlabel" {{style.labelclr}} ><span style="margin-left: 10%;"><span class="lan start_date"></span></span><span style="float: right;margin-right: 20%;"><span class="lan end_date"></span></span></span></div>
+			          <input class="icolor " {{style.ipclr}}  type="date" name="date1"/>
+			          <input class="icolor " {{style.ipclr}}  type="date" name="date2"/>
+					 </div>
+					 <div class="searchbtn" style="{{css.btncnf}} margin:7px;display:none;"><span class="lan search_label"></span></div>
+					 </form>
+					 <form action="{% url 'viewrecords' %}" method="post" >
+			      	{% csrf_token %}
+					 <div class="search-nav-div" id="on-word-div">
+					   <div class="searchlabel " {{style.labelclr}} ><span class="lan search_by_keyword"></span></div>
+			          <input class="icolor" {{style.ipclr}}  type="text" placeHolder="type here" name="searchkey"/>
+					  </div>
+			          <div class="searchbtn" style="{{css.btncnf}} margin:7px;display:none;"><span class="lan search_label"></span></div>
+			          </form>
+			      </div>
+
+
+			   </div>
+			  {% ifequal entries.count 0 %}
+			  <form action="{% url 'viewrecords' %}" method="post" >
+			      {% csrf_token %}
+			      <div class="searchwrap" style="padding-bottom: 16px;" >
+			          <!--<div class="searchlabel"><span class="lan see_last_30"></span></div>-->
+					  <button class="searchlabel"
+					  style="width: 100%;background: cornflowerblue;border-radius: 5px; margin-top: 5px;">
+					      <span class="lan see_last_30">see last 30 records</span>
+					   </button>
+			      </div>
+			  </form>
+			  {% endifequal %}
+			   </div>
+			  {% if entries %}
+            {% for entry in entries %}
+			      <div class="big-block" style="{{css.cardclr}} padding:4%;margin-top:3%;">
+                <div class="dat"><span class="lan date_label"></span> : {{entry.wdate}} <span class="viewmore " {{style.btnpro}} ><span class="lan show_details"></span></span></div>
+                <div class="formwrap">
+                <form>
+                    {% csrf_token %}
+					<input type="hidden" name="wid" value="{{entry.id}}"/>
+
+
+    <div class="editdiv smoothborder"><span class="reclabel " {{style.labelclr}} ><span class="lan work_date"></span> :</span>
+    <div class="tempData">{{entry.wdate |date:'Y-m-d' }}T{{entry.wdate |date:'H:i' }}</div>
+    <input class="recordedit " {{style.ipclr}}  type="datetime-local" value="{{entry.wdate |date:'Y-m-d' }}T{{entry.wdate |date:'H:i' }}" name="wdate" readonly/>
+    </div>
+
+<div class="editdiv smoothborder"><span class="reclabel" {{style.labelclr}}><span class="lan attendance_label"></span> :</span>
+<div class="tempData">{{entry.attendance}}</div>
+<input class="recordedit " {{style.ipclr}} type="text" value="{{entry.attendance}}" name="attendance"  readonly/>
+</div>
+
+<div class="editdivblock smoothborder"><div class="reclabeldiv " {{style.labelclr}}><span class="lan names_label"></span> :</div>
+<div class="tempData">{{entry.names}}</div>
+<textarea class="recordeditdiv" style=" {{css.ipclr}}height:70px;"  type="text"  name="names"  readonly>{{entry.names}}</textarea>
+</div>
+
+<div style="height:150px;" class="editdiv smoothborder"><div class="reclabeldiv" {{style.labelclr}}><span class="lan work_details"></span> :</div>
+<div class="tempData">{{entry.work}}</div>
+<textarea class="recordeditdiv" style=" {{css.ipclr}}height:120px;" name="work" resize: none; readonly>{{entry.work}}</textarea>
+</div>
+
+					<div class="updatebtn" {{style.btnupd}}>
+						<span class="lan update_label"></span>
+						</div>
+						<div class="editrecbtn " {{style.btncnf}}><span class="lan edit_details"></span></div>
+					<div class="whatsappwrap"></div>
+				</form>
+				 </div>
+                </div>
+				{% endfor %}
+            {% else %}
+                    <div class="mainwrap" style="padding-top:20px; padding-bottom:20px;margin-left:5%">
+                        sorry no records found!
+                        </div>
+                        {% endif %}
+			</div>
+<script>
+    var navigation="{% url 'navigation' %}";
+    var updaterecords="{% url 'updaterecords' %}";
+</script>
+	{% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+<script src="{% static 'diary/custom.js' %}"></script>
+
+</body>
+</html>

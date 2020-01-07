@@ -1,0 +1,89 @@
+{% load static %}
+<html {{style.bgclr}} >
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body class="noselect">
+
+
+<div class="super-block" style="{{css.bgclr}}padding-top:130px;">
+
+			    <div class="mynav navclr" style="{{css.navclr}}width:100%">
+			        <div class="homewrap"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			        <div class="lans">{{lan}}</div>
+			    </div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan how_to_enter_data "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan how_to_enter_data_details"></span>
+</div>
+</div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan how_to_view_data "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan how_to_view_data_details"></span>
+</div>
+</div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan how_to_edit_data "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan how_to_edit_data_details"></span>
+</div>
+</div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan send_data_on_whatsapp "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan send_data_on_whatsapp_details"></span>
+</div>
+</div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan how_to_edit_personal_info "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan how_to_edit_personal_info_details"></span>
+</div>
+</div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan what_is_contact_admin "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan what_is_contact_admin_details"></span>
+</div>
+</div>
+
+<div class="mainwrap " style=" {{css.cardclr}}margin-left: 5%;">
+<div class="dat viewmore_help"><span class="lan what_is_verify_user "></span></div>
+<div class="formwrap"><hr style="margin:5px;border-top:1px solid black">
+<span class="lan what_is_verify_user_details"></span>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+<script>
+    var navigation="{% url 'navigation' %}";
+</script>
+	{% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+
+
+<script src="{% static 'diary/custom.js' %}"></script>
+</body>
+</html>

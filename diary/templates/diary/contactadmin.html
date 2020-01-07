@@ -1,0 +1,64 @@
+{% load static %}
+<html {{style.bgclr}}>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body class="noselect">
+ {% ifnotequal  popmsg "empty" %}
+    <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+    {% endifnotequal  %}
+<div class="super-block" style="{{css.bgclr}}" >
+
+                <div class="mynav" style="{{css.navclr}}" >
+			        <div class="homewrap" style="margin-left: 12px;"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			        <div class="lans">{{lan}}</div>
+			    </div>
+
+
+			 <div style="margin: 30px;">
+             <div class="msg_wrap" id="msg_wrap_id">
+             {% for msg in message %}
+             {% ifnotequal msg.touser 'admin' %}
+                <div class="send_div"><div class="receive_msg" ><div class="chat-pop-left">{{msg.message}}</div></div></div>
+             {% else %}
+             {% ifequal msg.status 'read' %}
+                <div class="send_div"><div class="send_msg" ><div class="chat-pop-right">{{msg.message}}</div></div></div><div class="tick">✓✓</div><br>
+             {% else %}
+             <div class="send_div"><div class="send_msg" ><div class="chat-pop-right">{{msg.message}}</div></div></div><div class="tick">✓</div><br>
+             {% endifequal %}
+             {% endifnotequal %}
+             {% endfor %}
+             </div>
+				<form class="msg-form">
+                {% csrf_token %}
+                    <div class="feedback" style="{{css.ipclr}}" contenteditable></div>
+                    <input type="hidden" name="message" class="hiddenmsg"/>
+						<div class="sendmsg imgicon">
+						<img  style="height: 36px;position: absolute;" src="media/diary/icons8send.png" alt="img"/>
+						</div>
+
+
+				</form>
+			</div>
+			</div>
+		</div>
+<script>
+    var navigation="{% url 'navigation' %}";
+    var sendmsg="{% url 'contactadmin' %}"
+</script>
+	{% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+    <script src="{% static 'diary/custom.js' %}"></script>
+</body>
+</html>

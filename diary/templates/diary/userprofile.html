@@ -1,0 +1,71 @@
+{% load static %}
+<html {{style.bgclr}}>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+</head>
+<body>
+
+
+{% ifnotequal  popmsg "empty" %}
+    <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+    {% endifnotequal  %}
+
+<div class="super-block" {{style.bgclr}} >
+
+
+			     <div class="mynav" {{style.navclr}}>
+			        <div class="homewrap" style="margin-left: 12px;"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			        <div class="lans">{{lan}}</div>
+			    </div>
+				<form class="big-block" {{style.cardclr}} action="{% url 'userprofile' %}" method="post" >
+                {% csrf_token %}
+					<input  type="hidden" value="com" readonly/>
+
+					<div class="editdiv smoothborder"><span class="reclabel"><span class="lan first_name"></span> : </span>
+					<div class="tempData">{{emp.fname}}</div>
+					<input class="dataedit" {{style.ipclr}}  type="text" value="{{emp.fname}}" name="fname" readonly/>  </div>
+                    <div class="editdiv smoothborder"><span class="reclabel"><span class="lan last_name"></span> :</span>
+                    <div class="tempData" {{style.ipclr}}>{{emp.lname}}</div>
+                    <input class="dataedit" {{style.ipclr}}  type="text" value="{{emp.lname}}" name="lname"  readonly/></div>
+                    <div class="editdiv smoothborder"><span class="reclabel"><span class="lan place_label"></span>  :</span>
+                    <div class="tempData">{{emp.address}}</div>
+                    <input class="dataedit" {{style.ipclr}}  type="text" value="{{emp.address}}" name="place"  readonly/> </div>
+                    <div class="editdiv smoothborder"><span class="reclabel" style="width:37%"><span class="lan phone_number"></span> :</span>
+                    <div class="tempData ">{{emp.phone}}</div>
+                    <input class="dataeditnon" {{style.ipclr}}  type="text" value="{{emp.phone}}" name="pnumber"  readonly/> </div>
+
+
+
+					<button class="updatebtn2" {{style.btnupd}}>
+						<span class="lan update_label"></span>
+						</button>
+						<div class="editrecbtn" {{style.btncnf}}><span class="lan edit_details"></span></div>
+					</div>
+
+				</form>
+			</div>
+
+<script>
+    var navigation="{% url 'navigation' %}";
+</script>
+	{% ifequal lan "हिंदी" %}
+       <script> var savelan="en";</script>
+    {% else  %}
+       <script> var savelan="hi";</script>
+    {% endifequal  %}
+
+
+
+
+<script src="{% static 'diary/custom.js' %}"></script>
+
+</body>
+</html>
