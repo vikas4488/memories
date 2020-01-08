@@ -1,4 +1,4 @@
-from .models import MhqEmp,Theme
+from .models import MhqEmp,Theme,MhqEmpFeedback as mef
 class UserProcess:
     @staticmethod
     def register(request):
@@ -30,7 +30,10 @@ class UserProcess:
         try:
             emp=MhqEmp.objects.get(userid=uid)
             if emp.password==password:
-                msg="login_success"
+                if emp.user_type=='superuser':
+                    msg="superuser"
+                else:
+                    msg="login_success"
                 request.session['userid'] = emp.userid
                 request.session['fname'] = emp.fname
                 request.session['lname'] = emp.lname
@@ -53,4 +56,9 @@ class UserProcess:
         emp.lname=request.POST['lname']
         emp.address=request.POST['place']
         emp.save()
-        return "updated_successfully"
+        return "updated_successfully" 
+    
+    @staticmethod
+    def getUserInfo(request):
+        users=MhqEmp.objects.all()
+        return users

@@ -120,7 +120,7 @@ class Help:
         w.userid=request.session['userid']
         w.message=request.POST['message']
         w.status='unread'
-        w.touser='admin'
+        w.touser=request.POST['touser']
         w.edate=datetime.now()
         w.save()
         return 'message sent'
@@ -140,9 +140,7 @@ class Help:
 
     @staticmethod
     def getmessages(request):
-        m=mef.objects.filter(Q(userid=request.session['userid'])|Q(touser=request.session['userid']))
+        touser=request.POST['touser']
+        userid=request.session['userid']
+        m=mef.objects.filter(Q(userid=userid)&Q(touser=touser)|Q(touser=userid)&Q(userid=touser)).order_by('edate')
         return m
-
-
-
-

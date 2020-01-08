@@ -32,7 +32,7 @@
         window.location.href = viewrecords;
      });
  $('#contactadmin').on('click', function(){
-        window.location.href = contactadmin;
+        $(this).parent().submit();
      });
  $('#verifyuser').on('click', function(){
      var webl="https://themysterio.000webhostapp.com";
@@ -411,7 +411,7 @@
         msg=$(".feedback").text();
         $(".hiddenmsg").val(msg);
         $(".feedback").text('');
-        $(".msg_wrap").append('<div class="send_div"><div class="send_msg"><div class="chat-pop-right">'+msg+'</div></div></div><div class="tick jssent">⸮</div><br>')    
+        $(".msg_wrap").append('<div class="send_msg"><div class="chat-pop-right">'+msg+'<div class="tick jssent">⸮</div></div></div>')    
         var objDiv = document.getElementById("msg_wrap_id");
         objDiv.scrollTop = objDiv.scrollHeight;
         $.ajax({

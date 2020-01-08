@@ -624,28 +624,28 @@ box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 
   float: right;
   width: 100%;
 }
-.chat-pop-right:after {
-  content: '';
-top: 1px;
-right: -18px;
-position: absolute;
-border: 0px solid;
-display: block;
-  width: 19px;
-height: 8px;
-background-color: transparent;
-border-bottom-left-radius: 50%;
-border-bottom-right-radius: 50%;
-box-shadow: -7px 4px 0px 2px #3b4fff;
+.send_msg:after {
+    content: '';
+    top: 43px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: -14px;
+    border: 0px solid;
+    display: block;
+    width: 19px;
+    height: 8px;
+    background-color: transparent;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+  box-shadow: -7px 4px 0px 2px #3b4fff;
 }
 .chat-pop-right
 {
-position: relative;
-width: 100%;
-padding: 6px;
 background:#3b4fff;
-border-radius: 6px;
-right: 13px;
+display: inline-block;
+float:right;
+padding:5px;
+border-radius: 5px;
 }
 .chat-pop-left:after {
   content: '';
@@ -671,11 +671,16 @@ border-radius: 6px;
 margin-left: 11px;
 }
 .send_msg{
-  text-align:right;
-  max-width:80%;
-  margin-left: 2px;
-  display:inline-block;
-  float:right;
+  color:white;
+  padding: 5px;
+  margin: 5px;
+  margin-top:0px;
+  margin-bottom:0px;
+  display: inline-block;
+  float: right;
+  max-width: 80%;
+  min-width: 80%;
+  margin-left: 30%;
 }
 .receive_msg{
 
@@ -684,8 +689,8 @@ margin-left: 11px;
   display:inline-block;
 }
 .send_div {
-  margin-top: 17px;
   color:white;
+  margin-top: 11px;
 }
 .msg-form{
   position: absolute;
@@ -717,6 +722,8 @@ margin-left: 11px;
 }
 .tick{
   display: inline-block;
-    float: right;
-    margin-right: 14px;
+  float:right;
+  font-size:9px;
+  margin-top: 6px;
+  margin-left: 5px;
 }

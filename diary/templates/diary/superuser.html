@@ -1,0 +1,74 @@
+{% load static %}
+<html {{style.bgclr}}>
+    <head>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" content="notranslate">
+    <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
+    <script src="{% static 'utils/bootstrap.min.js' %}"></script>
+    <script src="{% static 'utils/jquery.min.js' %}"></script>
+    <script src="{% static 'diary/language.js' %}"></script>
+
+</head>
+<body class="noselect">
+
+{% ifnotequal  popmsg "empty" %}
+    <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+    {% endifnotequal  %}
+
+
+
+
+<div style="display:none" class="popwrap"><div class="popmsg" {{style.popupclr}} ><div class="ajaxmsg">loading.....</div><div class="closeconfirm" {{style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
+<div class="super-block" {{style.bgclr}} >
+
+			    <div class="mynav" {{style.navclr}} >
+			        <div class="homewrap"><div class="homebtn"></div></div>
+			        <div class="diary">DIARY</div>
+			    
+			   </div>
+			  {% if users %}
+            {% for user in users %}
+			      <div class="big-block" style="{{css.cardclr}} padding:4%;margin-top:3%;">
+                  <div class="dat">name : {{user.fname}} <span class="viewmore " {{style.btnpro}} ><span class="lan show_details"></span></span></div>
+                <div class="formwrap">
+                <form>
+                    {% csrf_token %}
+					<input type="hidden" name="wid" value="{{user.id}}"/>
+
+<div class="editdiv smoothborder"><span class="reclabel" {{style.labelclr}}>fname :</span>
+<div class="tempData">{{user.fname}}</div>
+<input class="recordedit " {{user.fname}} type="text" value="{{user.fname}}" name="fname"  readonly/>
+</div>
+
+<div class="editdiv smoothborder"><span class="reclabel" {{style.labelclr}}>lname :</span>
+<div class="tempData">{{user.lname}}</div>
+<input class="recordedit " {{user.lname}} type="text" value="{{user.lname}}" name="lname"  readonly/>
+</div>
+
+<div class="editdiv smoothborder"><span class="reclabel" {{style.labelclr}}>phone :</span>
+<div class="tempData">{{user.phone}}</div>
+<input class="recordedit " {{user.phone}} type="text" value="{{user.phone}}" name="phone"  readonly/>
+</div>
+
+
+
+					<div class="updatebtn" {{style.btnupd}}>
+						<span class="lan update_label"></span>
+						</div>
+						<div class="editrecbtn " {{style.btncnf}}><span class="lan edit_details"></span></div>
+				</form>
+				 </div>
+                </div>
+				{% endfor %}
+                        {% endif %}
+			</div>
+<script>
+    var navigation="{% url 'navigation' %}";
+    var updaterecords="{% url 'updaterecords' %}";
+</script>
+<script src="{% static 'diary/custom.js' %}"></script>
+
+</body>
+</html>

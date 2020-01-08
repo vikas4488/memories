@@ -30,9 +30,9 @@
                 <div class="send_div"><div class="receive_msg" ><div class="chat-pop-left">{{msg.message}}</div></div></div>
              {% else %}
              {% ifequal msg.status 'read' %}
-                <div class="send_div"><div class="send_msg" ><div class="chat-pop-right">{{msg.message}}</div></div></div><div class="tick">✓✓</div><br>
+                <div class="send_msg" ><div class="chat-pop-right">{{msg.message}}<div class="tick">✓✓</div></div></div>
              {% else %}
-             <div class="send_div"><div class="send_msg" ><div class="chat-pop-right">{{msg.message}}</div></div></div><div class="tick">✓</div><br>
+             <div class="send_msg" ><div class="chat-pop-right">{{msg.message}}<div class="tick">✓</div></div></div>
              {% endifequal %}
              {% endifnotequal %}
              {% endfor %}
@@ -41,6 +41,7 @@
                 {% csrf_token %}
                     <div class="feedback" style="{{css.ipclr}}" contenteditable></div>
                     <input type="hidden" name="message" class="hiddenmsg"/>
+                    <input type="hidden" name="touser" value="{{touser}}"/>
 						<div class="sendmsg imgicon">
 						<img  style="height: 36px;position: absolute;" src="media/diary/icons8send.png" alt="img"/>
 						</div>

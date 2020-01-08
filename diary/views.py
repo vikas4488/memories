@@ -19,7 +19,9 @@ def register(request):
 def login(request):
     if 'userid' not in request.session:
         status=up.login(request)
-        if status=="login_success":
+        if status=="superuser":
+            return redirect(superuser)
+        elif status=="login_success":
             return redirect(navigation)
         elif status=="user_does_not_exist":
             return render(request, 'diary/index.html')
@@ -66,7 +68,8 @@ def contactadmin(request):
             return HttpResponse(message)
         color=hp.colorhelp(request.session['color'])
         msg=hp.getmessages(request)
-        return render(request, 'diary/contactadmin.html',{'lan':request.session['lan'],'css':color["css"],'style':color["style"],'popmsg':'empty','message':msg})
+        touser=request.POST['touser']
+        return render(request, 'diary/contactadmin.html',{'lan':request.session['lan'],'css':color["css"],'style':color["style"],'popmsg':'empty','message':msg,'touser':touser})
 def help(request):
     if 'userid' not in request.session:
         return redirect(index)
@@ -116,3 +119,11 @@ def updaterecords(request):
 def logout(request):
     hp.logout(request)
     return redirect(index)
+
+def superuser(request):
+    if 'userid' not in request.session:
+        return redirect(index)
+    else:
+        users=up.getUserInfo(request)
+        color=hp.colorhelp(request.session['color'])
+        return render(request, 'diary/superuser.html',{'lan':request.session['lan'],'fname':request.session['fname'],'lname':request.session['lname'],'css':color["css"],'style':color["style"],'popmsg':'empty','users':users})

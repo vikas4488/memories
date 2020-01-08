@@ -54,12 +54,16 @@
             <span class="lan theme_label"></span>
         </span>
 </div>
+<form style="display:inline;" action="{% url 'contactadmin' %}" method="post" >
+{% csrf_token %}
+<input type="hidden" value="admin" name="touser"/>
 <div id="contactadmin" class="boxes">
  <img class="menu-icon" src="media/diary/icons8creator.png"/>
         <span class="menu-label">
             <span class="lan contact_admin"></span>
         </span>
 </div>
+</form>
 <div id="verifyuser" class="boxes">
  <img class="menu-icon" src="media/diary/icons8friends.png"/>
         <span class="menu-label">
@@ -91,7 +95,6 @@
     var userprofile="{% url 'userprofile' %}";
     var dataentry="{% url 'dataentry' %}";
     var viewrecords="{% url 'viewrecords' %}";
-    var contactadmin="{% url 'contactadmin' %}";
     var logout="{% url 'logout' %}";
     var help="{% url 'help' %}";
     var about="{% url 'about' %}";
