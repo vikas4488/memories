@@ -127,3 +127,6 @@ def superuser(request):
         users=up.getUserInfo(request)
         color=hp.colorhelp(request.session['color'])
         return render(request, 'diary/superuser.html',{'lan':request.session['lan'],'fname':request.session['fname'],'lname':request.session['lname'],'css':color["css"],'style':color["style"],'popmsg':'empty','users':users})
+def getnewmsg(request):
+    message=hp.getnewmsg(request)
+    return HttpResponse(message)

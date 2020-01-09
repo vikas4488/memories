@@ -54,11 +54,18 @@
 
 
 
+
 					<div class="updatebtn" {{style.btnupd}}>
 						<span class="lan update_label"></span>
 						</div>
 						<div class="editrecbtn " {{style.btncnf}}><span class="lan edit_details"></span></div>
 				</form>
+
+<form  action="{% url 'contactadmin' %}" method="post" >
+{% csrf_token %}
+<input type="hidden" value="{{user.userid}}" name="touser"/>
+<button>chat</button>
+</form>
 				 </div>
                 </div>
 				{% endfor %}

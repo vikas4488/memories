@@ -26,13 +26,13 @@
 			 <div style="margin: 30px;">
              <div class="msg_wrap" id="msg_wrap_id">
              {% for msg in message %}
-             {% ifnotequal msg.touser 'admin' %}
+             {% ifnotequal msg.touser touser %}
                 <div class="send_div"><div class="receive_msg" ><div class="chat-pop-left">{{msg.message}}</div></div></div>
              {% else %}
              {% ifequal msg.status 'read' %}
                 <div class="send_msg" ><div class="chat-pop-right">{{msg.message}}<div class="tick">✓✓</div></div></div>
              {% else %}
-             <div class="send_msg" ><div class="chat-pop-right">{{msg.message}}<div class="tick">✓</div></div></div>
+             <div class="send_msg" ><div class="chat-pop-right">{{msg.message}}<div class="tick unread">✓</div></div></div>
              {% endifequal %}
              {% endifnotequal %}
              {% endfor %}
@@ -51,15 +51,26 @@
 			</div>
 			</div>
 		</div>
+        <form class="new-msg-form">
+                {% csrf_token %}
+        <input type="hidden" name="touser" value="{{touser}}"/>
+        </form>
 <script>
     var navigation="{% url 'navigation' %}";
     var sendmsg="{% url 'contactadmin' %}"
+    var getnewmsg="{% url 'getnewmsg' %}"
+    
 </script>
 	{% ifequal lan "हिंदी" %}
        <script> var savelan="en";</script>
     {% else  %}
        <script> var savelan="hi";</script>
     {% endifequal  %}
-    <script src="{% static 'diary/custom.js' %}"></script>
+    <script src="{% static 'diary/custom.js' %}">
+    </script>
+<script>
+    scrollBottom();
+    setInterval(function(){ getNewMsg() }, 3000);
+</script>
 </body>
 </html>

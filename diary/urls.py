@@ -19,6 +19,7 @@ urlpatterns = [
     path('createtheme',views.createtheme,name='createtheme'),
     path('settheme',views.settheme,name='settheme'),
     path('superuser',views.superuser,name='superuser'),
+    path('getnewmsg',views.getnewmsg,name='getnewmsg'),
     #path('theme/(?P<msg>\w+)/$',views.theme,name='theme'),
     #path('<int:h_id>/details', views.details, name='details'),
 ]

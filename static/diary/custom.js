@@ -411,7 +411,7 @@
         msg=$(".feedback").text();
         $(".hiddenmsg").val(msg);
         $(".feedback").text('');
-        $(".msg_wrap").append('<div class="send_msg"><div class="chat-pop-right">'+msg+'<div class="tick jssent">⸮</div></div></div>')    
+        $(".msg_wrap").append('<div class="send_msg"><div class="chat-pop-right">'+msg+'<div class="tick unread jssent">•</div></div></div>')    
         var objDiv = document.getElementById("msg_wrap_id");
         objDiv.scrollTop = objDiv.scrollHeight;
         $.ajax({
@@ -429,5 +429,33 @@
     });
 
   });
+  function getNewMsg(){
+    $.ajax({
+      type: 'post',
+      url: getnewmsg,
+      dataType: 'text',
+      data: $(".new-msg-form").serialize(),
+      success: function (response) {
+        data=JSON.parse(response); 
+        var mc=-1;
+        //console.log(mc);
+        $.each(data, function() {
+         mc=this['ucount'];
+         console.log(mc);
+          $.each(this, function(k, v) {
+            if(typeof this['message'] !== 'undefined')
+            $(".msg_wrap").append('<div class="send_div"><div class="receive_msg" ><div class="chat-pop-left">'+this['message']+'</div></div></div>');
+          });
+        });
+        if(mc==0){
+          $(".unread").html("✓✓");
+          $(".unread").removeClass("unread");
+        }
+        scrollBottom();
+      }
+    });
+  }
+  function scrollBottom(){
   var objDiv = document.getElementById("msg_wrap_id");
         objDiv.scrollTop = objDiv.scrollHeight;
+  }

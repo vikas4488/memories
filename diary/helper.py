@@ -2,6 +2,8 @@ from .models import MhqEmpData,Theme,MhqEmpFeedback as mef,MhqEmp
 from datetime import datetime
 from django.contrib.sessions.models import Session
 from django.db.models import Q
+from django.core.serializers import serialize
+import json
 class Help:
     @staticmethod
     def colorhelp(allcolor):
@@ -135,12 +137,30 @@ class Help:
         return 'theme applied'
     @staticmethod
     def logout(request):
-        Session.objects.all().delete()
+        for key in list(request.session.keys()):
+            del request.session[key]
         return "logged out sucess"
 
     @staticmethod
     def getmessages(request):
         touser=request.POST['touser']
         userid=request.session['userid']
+        mef.objects.filter(Q(touser=userid)&Q(userid=touser)&Q(status='unread')).update(status='read')
         m=mef.objects.filter(Q(userid=userid)&Q(touser=touser)|Q(touser=userid)&Q(userid=touser)).order_by('edate')
         return m
+
+    @staticmethod
+    def getnewmsg(request):
+        touser=request.POST['touser']
+        userid=request.session['userid']
+        m=mef.objects.filter(Q(touser=userid)&Q(userid=touser)&Q(status='unread')).order_by('edate')
+        jobj=serialize('json', m)
+        mcount=mef.objects.filter(Q(touser=touser)&Q(userid=userid)&Q(status='unread')).count()
+        mef.objects.filter(Q(touser=userid)&Q(userid=touser)&Q(status='unread')).update(status='read')
+        jobj=jobj[2:]
+        if m.count()==0:
+            return '[{"ucount":'+str(mcount)+'}]'
+        else:
+            return '[{"ucount":'+str(mcount)+','+jobj
+
+        #[{"model": "diary.mhqempfeedback"
