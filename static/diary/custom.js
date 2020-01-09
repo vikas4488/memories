@@ -234,7 +234,7 @@
          }
 
          }
-         else if($(this).attr('type')!="password"){
+         else if($(this).attr('type')!="password"&&$(this).attr('type')!="hidden"){
          cnfmsg=cnfmsg+"<div>"+$(this).parent().children("span").text()+" : ";
            cnfmsg=cnfmsg+ $(this).val()+"</div><br>";
          }
