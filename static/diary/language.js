@@ -18,7 +18,7 @@ lan={
       last_name: 'उपनाम',
       place_label: 'जगह',
 
-      phone_number: 'मोबाइल नंबर',
+      phone_number: 'मोबाइल',
       update_label: 'अपडेटं',
       work_date: 'काम की तारीख',
       date_label:'तारीख',
@@ -145,7 +145,7 @@ lan={
       last_name: 'last name',
       place_label: 'place',
 
-      phone_number: 'phone number',
+      phone_number: 'phone',
       update_label: 'Update',
       work_date: 'work date',
       attendance_label: 'attendance',
