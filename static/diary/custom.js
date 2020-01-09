@@ -438,10 +438,9 @@
       success: function (response) {
         data=JSON.parse(response); 
         var mc=-1;
-        //console.log(mc);
         $.each(data, function() {
          mc=this['ucount'];
-         console.log(mc);
+         //console.log(mc);
           $.each(this, function(k, v) {
             if(typeof this['message'] !== 'undefined')
             $(".msg_wrap").append('<div class="send_div"><div class="receive_msg" ><div class="chat-pop-left">'+this['message']+'</div></div></div>');
