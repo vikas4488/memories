@@ -185,7 +185,7 @@ border: 0;
 }
 .popwrap {
   position: fixed;
-  z-index: 25;
+  z-index: 13;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
@@ -751,5 +751,5 @@ margin-left: 24%;
     width: 100%;
     position: fixed;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 14;
 }
