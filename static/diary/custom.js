@@ -23,15 +23,19 @@
          $('#regformpop').slideUp(400);
      });
  $('#profilepage').on('click', function(){
+     $(".rainwait").show();
         window.location.href = userprofile;
      });
  $('#dataentrypage,.enter_records').on('click', function(){
+     $(".rainwait").show();
         window.location.href = dataentry;
      });
  $('#viewrecords,.view_records').on('click', function(){
+     $(".rainwait").show();
         window.location.href = viewrecords;
      });
  $('#contactadmin').on('click', function(){
+     $(".rainwait").show();
         $(this).parent().submit();
      });
  $('#verifyuser').on('click', function(){
@@ -44,15 +48,19 @@
        // window.location.href = "verifyuser.php";
      });
  $('#logout').on('click', function(){
+     $(".rainwait").show();
         window.location.href = logout;
      });
  $('#help').on('click', function(){
+     $(".rainwait").show();
         window.location.href = help;
      });
  $('#aboutit').on('click', function(){
+     $(".rainwait").show();
         window.location.href = about;
      });
  $('#themepage').on('click', function(){
+     $(".rainwait").show();
         window.location.href = theme;
      });
 
@@ -411,7 +419,7 @@
         msg=$(".feedback").text();
         $(".hiddenmsg").val(msg);
         $(".feedback").text('');
-        $(".msg_wrap").append('<div class="send_msg"><div class="chat-pop-right">'+msg+'<div class="tick unread jssent">•</div></div></div>')    
+        $(".msg_wrap").append('<div class="send_msg"><div class="chat-pop-right">'+msg+'<div class="tick unread jssent">•</div></div></div>')
         var objDiv = document.getElementById("msg_wrap_id");
         objDiv.scrollTop = objDiv.scrollHeight;
         $.ajax({
@@ -436,7 +444,7 @@
       dataType: 'text',
       data: $(".new-msg-form").serialize(),
       success: function (response) {
-        data=JSON.parse(response); 
+        data=JSON.parse(response);
         var mc=-1;
         $.each(data, function() {
          mc=this['ucount'];

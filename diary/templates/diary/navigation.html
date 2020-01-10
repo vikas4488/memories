@@ -3,7 +3,7 @@
 <html {{style.bgclr}}>
     <head>
         <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="google" content="notranslate">
     <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
@@ -23,7 +23,8 @@
     <div class="diary">DIARY</div>
 <div class="lans">{{lan}}</div>
 </div>
-
+<div class="rainwait imageblock" style="display:none;"><img class="rainimg" src="media/diary/rain.svg">
+</div>
 <div class="super-block" {{ style.bgclr}} >
 
 
