@@ -45,7 +45,7 @@
 			      	{% csrf_token %}
 				  <div class="search-nav-div" id="on-date-div" style="display:block">
 			          <div class="searchlabel " {{style.labelclr}} ><span class="lan search_specific_date"></span></div>
-			          <input class="icolor" {{style.ipclr}}  type="date" name="specificdate"/>
+			          <input class="icolor" {{style.ipclr}}  type="date" value="{% now 'Y-m-d' %}" name="specificdate"/>
 					</div>
 					<div class="searchbtn" style="{{css.btncnf}} margin:7px"><span class="lan search_label"></span></div>
                     </form>
@@ -53,8 +53,8 @@
 			      	{% csrf_token %}
 					<div class="search-nav-div" id="date-range-div">
 					  <div class="searchlabel" {{style.labelclr}} ><span style="margin-left: 10%;"><span class="lan start_date"></span></span><span style="float: right;margin-right: 20%;"><span class="lan end_date"></span></span></span></div>
-			          <input class="icolor " {{style.ipclr}}  type="date" name="date1"/>
-			          <input class="icolor " {{style.ipclr}}  type="date" name="date2"/>
+			          <input class="icolor " {{style.ipclr}} value="{% now 'Y-m-d' %}"  type="date" name="date1"/>
+			          <input class="icolor " {{style.ipclr}} value="{% now 'Y-m-d' %}"  type="date" name="date2"/>
 					 </div>
 					 <div class="searchbtn" style="{{css.btncnf}} margin:7px;display:none;"><span class="lan search_label"></span></div>
 					 </form>
