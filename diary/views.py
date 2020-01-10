@@ -7,7 +7,7 @@ from django.http import HttpResponse
 
 def index(request):
     if 'userid' not in request.session:
-        return render(request, 'diary/index.html')
+        return render(request, 'diary/index.html',{'message':'empty'})
     else:
         return redirect(navigation)
 def register(request):
@@ -24,9 +24,11 @@ def login(request):
         elif status=="login_success":
             return redirect(navigation)
         elif status=="user_does_not_exist":
-            return render(request, 'diary/index.html')
+            message="not registered"
+            return render(request, 'diary/index.html',{'message':message})
         else:
-            return render(request, 'diary/index.html')
+            message="invalid password"
+            return render(request, 'diary/index.html',{'message':message})
     else:
         return redirect(navigation)
 
