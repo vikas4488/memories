@@ -395,8 +395,8 @@
    });
 
    $(".settheme").click(function(){
+    $(".rainwait").show();
      $(this).parent().submit();
-
    });
      $(".thdelete").on('click', function () {
          var tid=$(this).parent().find('input[name ="themeid"]').val();
@@ -470,3 +470,6 @@
   var objDiv = document.getElementById("msg_wrap_id");
         objDiv.scrollTop = objDiv.scrollHeight;
   }
+  $("form").submit(function (e) {
+    $(".rainwait").show();
+});
