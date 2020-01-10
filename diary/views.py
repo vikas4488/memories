@@ -69,7 +69,7 @@ def contactadmin(request):
         color=hp.colorhelp(request.session['color'])
         msg=hp.getmessages(request)
         touser=request.POST['touser']
-        return render(request, 'diary/contactadmin.html',{'lan':request.session['lan'],'css':color["css"],'style':color["style"],'popmsg':'empty','message':msg,'touser':touser})
+        return render(request, 'diary/contactadmin.html',{'fname':request.session['fname'],'lname':request.session['lname'],'lan':request.session['lan'],'css':color["css"],'style':color["style"],'popmsg':'empty','message':msg,'touser':touser})
 def help(request):
     if 'userid' not in request.session:
         return redirect(index)
@@ -128,5 +128,8 @@ def superuser(request):
         color=hp.colorhelp(request.session['color'])
         return render(request, 'diary/superuser.html',{'lan':request.session['lan'],'fname':request.session['fname'],'lname':request.session['lname'],'css':color["css"],'style':color["style"],'popmsg':'empty','users':users})
 def getnewmsg(request):
-    message=hp.getnewmsg(request)
-    return HttpResponse(message)
+    if 'userid' not in request.session:
+        return redirect(index)
+    else:
+        message=hp.getnewmsg(request)
+        return HttpResponse(message)

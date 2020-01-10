@@ -41,13 +41,13 @@
                 <div class="colorscroll">
                     <div class="color-head">
 
+                       <span class="llb" style="border-right: 1px solid;padding-right: 5%;display: inline-block;width: 21%;">font</span>
                         <span class="llb">color</span>
-                        <span class="llb" style="border-right: 1px solid;">font</span>
                     </div>
 
                   {% for clr in theme.0.clrstr %}
 
-                    <div class="editdiv smoothborder"><span class="themelabel"><span class="{{clr.name}}">background color</span> : </span>
+                    <div class="editdiv smoothborder"><span class="themelabel"><span class="lan {{clr.name}}">background color</span> : </span>
 					<input class="themedataedit" type="color" clr="{{clr.clr1}}" value="{{clr.clr1}}" name="nclr" />
 					<input class="themedataedit" type="color" clr="{{clr.clr2}}" value="{{clr.clr2}}" name="fclr" />
 					</div>
@@ -92,14 +92,14 @@
                 <input type="hidden"  value="{{color.id}}" name="themeid" />
                 <div class="colorscroll">
                     <div class="color-head">
+                        <span class="llb" style="border-right: 1px solid;padding-right: 5%;display: inline-block;width: 21%;">font</span>
                         <span class="llb">color</span>
-                        <span class="llb" style="border-right: 1px solid;">font</span>
                     </div>
 
 
                     {% for clr in color.clrstr %}
                             <script> $(".{{color.id}}sm{{clr.name}}").css({"background-color": '{{clr.clr1}}', 'color': '{{clr.clr2}}'}); </script>
-                    <div class="editdiv smoothborder"><span class="themelabel"><span class="{{clr.name}}">background color</span> : </span>
+                    <div class="editdiv smoothborder"><span class="themelabel"><span class="lan {{clr.name}}">background color</span> : </span>
 					<input class="themedataedit" type="color" clr="{{clr.clr1}}" value="{{clr.clr1}}" name="nclr" />
 					<input class="themedataedit" type="color" clr="{{clr.clr2}}" value="{{clr.clr2}}" name="fclr" />
 					</div>

@@ -442,15 +442,20 @@
          mc=this['ucount'];
          //console.log(mc);
           $.each(this, function(k, v) {
-            if(typeof this['message'] !== 'undefined')
+            if(typeof this['message'] !== 'undefined'){
             $(".msg_wrap").append('<div class="send_div"><div class="receive_msg" ><div class="chat-pop-left">'+this['message']+'</div></div></div>');
+            scrollBottom();
+          }
           });
         });
         if(mc==0){
           $(".unread").html("✓✓");
           $(".unread").removeClass("unread");
         }
-        scrollBottom();
+        if($(".tick").hasClass("unread"))
+          $(".status").css('background','red');
+        else
+          $(".status").css('background','green')
       }
     });
   }
