@@ -12,7 +12,8 @@
 
 </head>
 <body class="noselect">
-
+<div class="rainwait imageblock" style="display:none;"><img class="rainimg" src="media/diary/rain.svg">
+</div>
 {% ifnotequal  popmsg "empty" %}
     <div class="popwrap"><div class="popmsg " {{ style.popupclr}}><div>{{popmsg}}</div><div class="closeconfirm " {{ style.btncnf}}> <span class="lan confirm_label"></span></div></div></div>
     {% endifnotequal  %}

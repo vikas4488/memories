@@ -11,6 +11,8 @@
     <script src="{% static 'diary/language.js' %}"></script>
 </head>
 <body class="noselect">
+<div class="rainwait imageblock" style="display:none;"><img class="rainimg" src="media/diary/rain.svg">
+</div>
     <form method="post" action="{% url 'createtheme' %}" id="themedelete">{% csrf_token %}<input type="hidden" value="" name="tid" /></form>
     <div class="popwrap formpop" style="display:none;"><div class="popmsg"{{ style.popupclr}}><div class="formmsg"></div><div class="closeconfirm cancle_btn" {{ style.btnrej}}><span class="lan cancle_label"></span></div><div class="closeconfirm dlform"{{ style.btncnf}}><span class="lan confirm_label"></span></div></div></div>
 {% ifnotequal  popmsg "empty" %}

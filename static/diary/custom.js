@@ -101,6 +101,7 @@
        $('.popwrap').hide();
      });
  $('.homebtn').on('click', function(){
+  $(".rainwait").show();
         window.location.href = navigation;
      });
      //for records show and hide
@@ -285,17 +286,15 @@
             $(".cancle_btn").show();
              $(".formmsg").html(cnfmsg);
             }else{
+            $(".rainwait").show();
             $(this).parent().submit();
-            $(".popwraplogin").show();
             }
         }
 
  });
  $('.submitForm').on('click', function () {
-
+  $(".rainwait").show();
      $("#regformpop").submit();
-     $(".popwraplogin").show();
-
  });
 
  $(".lan").each(function(){
