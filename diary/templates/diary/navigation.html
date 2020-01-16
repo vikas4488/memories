@@ -58,6 +58,7 @@
 <form style="display:inline;" action="{% url 'contactadmin' %}" method="post" >
 {% csrf_token %}
 <input type="hidden" value="0000" name="touser"/>
+<input type="hidden" value="admin" name="name"/>
 <div id="contactadmin" class="boxes">
  <img class="menu-icon" src="media/diary/icons8creator.png"/>
         <span class="menu-label">

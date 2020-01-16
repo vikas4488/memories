@@ -71,7 +71,8 @@ def contactadmin(request):
         color=hp.colorhelp(request.session['color'])
         msg=hp.getmessages(request)
         touser=request.POST['touser']
-        return render(request, 'diary/contactadmin.html',{'fname':request.session['fname'],'lname':request.session['lname'],'lan':request.session['lan'],'css':color["css"],'style':color["style"],'popmsg':'empty','message':msg,'touser':touser})
+        name=request.POST['name']
+        return render(request, 'diary/contactadmin.html',{'name':name,'fname':request.session['fname'],'lname':request.session['lname'],'lan':request.session['lan'],'css':color["css"],'style':color["style"],'popmsg':'empty','message':msg,'touser':touser})
 def help(request):
     if 'userid' not in request.session:
         return redirect(index)
