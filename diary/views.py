@@ -5,6 +5,18 @@ from .userProcess import UserProcess as up
 from .helper import Help as hp
 from django.http import HttpResponse
 
+from rest_framework import generics
+from . serializers import meq
+
+class API_objects(generics.ListCreateAPIView):
+    queryset = MhqEmp.objects.all()
+    serializer_class = meq
+
+class API_objects_details(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MhqEmp.objects.all()
+    serializer_class = meq
+
+
 def index(request):
     if 'userid' not in request.session:
         return render(request, 'diary/index.html',{'message':'empty'})

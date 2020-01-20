@@ -1,7 +1,7 @@
 from django.urls import path
 
 from.import views
-
+from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = [
     path('',views.index,name='index'),
     path('register',views.register,name='register'),
@@ -22,5 +22,9 @@ urlpatterns = [
     path('getnewmsg',views.getnewmsg,name='getnewmsg'),
     #path('theme/(?P<msg>\w+)/$',views.theme,name='theme'),
     #path('<int:h_id>/details', views.details, name='details'),
+    path('basic/', views.API_objects.as_view()),
+    path('basic/<int:pk>/', views.API_objects_details.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
 

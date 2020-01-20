@@ -25,12 +25,13 @@ SECRET_KEY = '#%&=y$!44*xy0ny()6)vzv+m4+ah57cs$58olz3**j^u^8tz=p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'vikas04488.pythonanywhere.com']
+ALLOWED_HOSTS = [u'vikas4488.pythonanywhere.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,10 +78,10 @@ WSGI_APPLICATION = 'memories.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vikas04488$diarydb',
-        'USER': 'vikas04488',
+        'NAME': 'vikas4488$diarydb',
+        'USER': 'vikas4488',
         'PASSWORD': 'mysterio',
-        'HOST': 'vikas04488.mysql.pythonanywhere-services.com',
+        'HOST': 'vikas4488.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
@@ -126,7 +127,7 @@ STATIC_URL = '/static/'
 
 # default static files settings for PythonAnywhere.
 # see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
-MEDIA_ROOT = u'/home/vikas04488/memories/media'
+MEDIA_ROOT = u'/home/vikas4488/memories/media'
 MEDIA_URL = '/media/'
-STATIC_ROOT = u'/home/vikas04488/memories/static'
+STATIC_ROOT = u'/home/vikas4488/memories/static'
 STATIC_URL = '/static/'
