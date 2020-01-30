@@ -22,8 +22,9 @@ urlpatterns = [
     path('getnewmsg',views.getnewmsg,name='getnewmsg'),
     #path('theme/(?P<msg>\w+)/$',views.theme,name='theme'),
     #path('<int:h_id>/details', views.details, name='details'),
-    path('basic/', views.API_objects.as_view()),
-    path('basic/<int:pk>/', views.API_objects_details.as_view()),
+    path('react/login', views.login_react),
+    #path('basic/<int:pk>/', views.API_objects_details.as_view()),
+    path('react/fetchr', views.fetchr_react),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

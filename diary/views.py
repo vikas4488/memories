@@ -4,18 +4,28 @@ from .models import MhqEmp,MhqEmpData
 from .userProcess import UserProcess as up
 from .helper import Help as hp
 from django.http import HttpResponse
-
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework import generics
 from . serializers import meq
+from .reacthandler import ReactHandler as rh
 
-class API_objects(generics.ListCreateAPIView):
-    queryset = MhqEmp.objects.all()
-    serializer_class = meq
 
-class API_objects_details(generics.RetrieveUpdateDestroyAPIView):
-    queryset = MhqEmp.objects.all()
-    serializer_class = meq
-
+@api_view(['GET'])
+def reg_react(request):
+    if request.method == 'GET':
+        snippets = MhqEmp.objects.all()
+        serializer = meq(snippets, many=True)
+        return Response(serializer.data)
+@api_view(['POST'])
+def login_react(request):
+    if request.method == 'POST':
+        return rh.login(request)
+@api_view(['POST'])
+def fetchr_react(request):
+    if request.method == 'POST':
+        return rh.fetchr(request)
 
 def index(request):
     if 'userid' not in request.session:
