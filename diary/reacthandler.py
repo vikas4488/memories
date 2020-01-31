@@ -28,7 +28,7 @@ class ReactHandler:
                 msg="login_success_google"
                 sg = meq(empg)
                 print(msg)
-                return Response(sg.data)
+                return Response(sg.data,status=status.HTTP_200_OK)
             except:
                 empn=MhqEmp()
                 empn.userid=uid
@@ -43,14 +43,14 @@ class ReactHandler:
                 msg="reg_success_google"
                 sn = meq(empn)
                 print(msg)
-                return Response(sn.data)     
+                return Response(sn.data,status=status.HTTP_200_OK)     
         try:
             emp=MhqEmp.objects.get(userid=uid)
             if emp.password==password:
                 msg="login_success"
                 s1 = meq(emp)
                 print(msg)
-                return Response(s1.data)
+                return Response(s1.data,status=status.HTTP_200_OK)  
             else:
                 msg="login_failed" 
                 print (msg)
@@ -75,7 +75,7 @@ class ReactHandler:
             print(uid)
             s1 = med(mdata, many=True)
             print(msg)
-            return Response(s1.data)
+            return Response(s1.data,status=status.HTTP_200_OK)
         except:
             msg="some problem while fetching data"  
             print (msg)
