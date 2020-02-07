@@ -1,4 +1,4 @@
-from .models import MhqEmp,Theme,MhqEmpFeedback as mef
+from .models import MhqEmp,MhqEmpData,Theme,MhqEmpFeedback as mef
 class UserProcess:
     @staticmethod
     def register(request):
@@ -26,27 +26,64 @@ class UserProcess:
     def login(request):
         uid=request.POST['userid']
         password=request.POST['password']
+        logintype=request.POST['logintype']
+        email=request.POST['email']
         msg="login_i"
-        try:
-            emp=MhqEmp.objects.get(userid=uid)
-            if emp.password==password:
-                if emp.user_type=='superuser':
-                    msg="superuser"
-                else:
+        if logintype=="glogin":
+            emp=MhqEmp()
+            try:
+                emp=MhqEmp.objects.get(userid=uid)
+                msg="login_success"
+            except:
+                try:
+                    emp=MhqEmp.objects.get(email=email)
+                    tempid=emp.userid
+                    MhqEmpData.objects.filter(userid=tempid).update(userid=uid)
+                    emp.userid=uid
+                    emp.save()
                     msg="login_success"
-                request.session['userid'] = emp.userid
-                request.session['fname'] = emp.fname
-                request.session['lname'] = emp.lname
-                if emp.lan=="en":
-                    request.session['lan'] = "हिंदी"
-                else:
-                    request.session['lan'] = "english"
-                clr=Theme.objects.get(pk=emp.theme)
-                request.session['color'] = clr.color
+                except:
+                    emp=MhqEmp()
+                    emp.userid=uid
+                    emp.fname=request.POST['name']
+                    emp.user_type='local'
+                    emp.lan='en'
+                    emp.theme=1
+                    emp.email=email
+                    emp.password=password
+                    emp.save()
+                    msg="login_success"
+            if emp.lan=="en":
+                request.session['lan'] = "हिंदी"
             else:
-                msg="login_failed"
-        except:
-            msg="user_does_not_exist"
+                request.session['lan'] = "english"
+            request.session['userid'] = emp.userid
+            request.session['fname'] = emp.fname
+            request.session['lname'] = emp.lname
+            clr=Theme.objects.get(pk=emp.theme)
+            request.session['color'] = clr.color
+        else:
+            try:
+                emp=MhqEmp.objects.get(phone=uid)
+                if emp.password==password:
+                    if emp.user_type=='superuser':
+                        msg="superuser"
+                    else:
+                        msg="login_success"
+                    request.session['userid'] = emp.userid
+                    request.session['fname'] = emp.fname
+                    request.session['lname'] = emp.lname
+                    if emp.lan=="en":
+                        request.session['lan'] = "हिंदी"
+                    else:
+                        request.session['lan'] = "english"
+                    clr=Theme.objects.get(pk=emp.theme)
+                    request.session['color'] = clr.color
+                else:
+                    msg="login_failed"
+            except:
+                msg="user_does_not_exist"
+        print(msg)
         return msg
 
     @staticmethod

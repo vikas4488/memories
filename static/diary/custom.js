@@ -48,6 +48,10 @@
        // window.location.href = "verifyuser.php";
      });
  $('#logout').on('click', function(){
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
      $(".rainwait").show();
         window.location.href = logout;
      });
@@ -473,3 +477,22 @@
   $("form").submit(function (e) {
     $(".rainwait").show();
 });
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  $('#loginsec input[name ="userid"]').val(profile.getId());
+  $('#loginsec input[name ="password"]').val("gpass");
+  $('#loginsec input[name ="logintype"]').val("glogin");
+  $('#loginsec input[name ="name"]').val(profile.getName());
+  $('#loginsec input[name ="email"]').val(profile.getEmail());
+  $("#loginsec").submit();
+}
+
+function onLoad() {
+  gapi.load('auth2', function() {
+    gapi.auth2.init();
+  });
+}

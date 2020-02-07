@@ -5,11 +5,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google" content="notranslate">
+	<meta name="google-signin-client_id" content="232621114578-iihtvv9gmfrhdn3b3usimcd0sdnq7l5o.apps.googleusercontent.com">
     <link rel="stylesheet" type="text/css" href="{% static 'diary/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'utils/bootstrap.min.css' %}">
     <script src="{% static 'utils/bootstrap.min.js' %}"></script>
     <script src="{% static 'utils/jquery.min.js' %}"></script>
     <script src="{% static 'diary/language.js' %}"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body class="noselect">
 
@@ -50,13 +52,15 @@
 						<input class="ip login-border" type="password" name="password" placeholder=" "pattern="[a-zA-Z0-9]{4,10}" />
 						<span class="lan password_label iplabel "></span>
 					</div>
-
-
+					<input type="hidden" value="loname" name="name" />
+					<input type="hidden" value="login" name="logintype" />
+					<input type="hidden" value="logemail" name="email" />
 
 						<div id="loginbutton" class="log-reg btn-cnf">
 							<span class="lan login_button"></span>
 						</div>
-
+						<div class="google-or">or</div>
+<div class="g-signin2" data-longtitle="true" data-text="vikas" data-onsuccess="onSignIn"></div>
 
 				</form>
 
